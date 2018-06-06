@@ -5,17 +5,21 @@ import org.luaj.vm2_v3_0_1.lib.ZeroArgFunction;
 
 import com.theincgi.advancedMacros.publicInterfaces.LuaPlugin;
 
+
+//Loader function, must also implement LuaPlugin
 public class HelloWorld extends TwoArgFunction implements LuaPlugin{
+	
+	//This is what you will use with 'require' to load your library
 	@Override
 	public String getLibraryName() {
 		return "helloWorld";
 	}
 	
-	public HelloWorld() {
-	}
+	//No arg constructor is implied
+	//if you add other contructors include a no arg one as well
 	
-	@Override
-	public LuaValue call(LuaValue arg1, LuaValue arg2) {
+	@Override 
+	public LuaValue call(LuaValue name, LuaValue env) {
 		LuaTable lib = new LuaTable();
 		lib.set("test", new Test());
 		return lib;
